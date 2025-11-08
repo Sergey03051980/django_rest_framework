@@ -12,3 +12,15 @@ poetry.lock
 .sqlite3
 media/
 .DS_Store
+# Environment
+.env
+*.env
+
+# Database
+*.sqlite3
+/database/
+
+# IDE
+.idea/
+.vscode/
+
