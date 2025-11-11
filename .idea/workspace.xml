@@ -5,21 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d6008a6-9b39-4bec-9cc4-f68086b6232c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lms_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/lms_project/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lms_project/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/lms_project/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/materials/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/materials/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature_30.2_Сериализаторы" />
+        <entry key="$PROJECT_DIR$" value="feature_30.1-Вьюсеты-и-дженерики" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,6 +53,11 @@
     <setting file="file://$PROJECT_DIR$/.env" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/.gitignore" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/lms_project/settings.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/materials/serializers.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/users/admin.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/users/models.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/users/serializers.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/users/views.py" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -53,7 +71,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#1 on feature__30.1-Вьюсеты-и-дженерики",
+    "git-widget-placeholder": "feature__30.2__Сериализаторы",
     "settings.editor.selected.configurable": "vcs.Subversion.SSH"
   }
 }]]></component>
@@ -79,15 +97,5 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/materials/serializers.py</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
