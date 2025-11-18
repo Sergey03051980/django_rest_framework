@@ -10,9 +10,3 @@ class CourseAdmin(admin.ModelAdmin):
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
     list_display = ('title', 'course', 'video_link')
-
-
-from django.contrib import admin
-
-
-# Register your models here.
