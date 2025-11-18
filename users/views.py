@@ -16,6 +16,10 @@ class PaymentViewSet(viewsets.ModelViewSet):
         """Пользователь видит только свои платежи"""
         return Payment.objects.filter(user=self.request.user)
 
+    def perform_create(self, serializer):
+        """Автоматически назначаем текущего пользователя при создании платежа"""
+        serializer.save(user=self.request.user)
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
