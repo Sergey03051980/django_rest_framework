@@ -11,6 +11,12 @@ from .permissions import IsOwner
 from .services.stripe_service import StripeService
 from materials.models import Course, Lesson
 
+# ДОБАВИМ ИМПОРТЫ ДЛЯ PUBLIC VIEWS
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
 
 class PaymentViewSet(viewsets.ModelViewSet):
     queryset = Payment.objects.none()  # Для документации
@@ -30,7 +36,6 @@ class PaymentViewSet(viewsets.ModelViewSet):
         """Автоматически назначаем текущего пользователя при создании платежа"""
         serializer.save(user=self.request.user)
 
-    # STRIPE ЭНДПОИНТЫ:
     @action(detail=False, methods=['post'])
     def create_stripe_payment(self, request):
         """Создание платежа через Stripe"""
@@ -75,9 +80,10 @@ class PaymentViewSet(viewsets.ModelViewSet):
             # Создаем цену
             price = StripeService.create_price(product.id, amount)
 
-            # Создаем сессию оплаты
-            success_url = request.build_absolute_uri(reverse('payment-success'))
-            cancel_url = request.build_absolute_uri(reverse('payment-cancel'))
+            # ИСПРАВИМ URLы - они должны быть абсолютными
+            base_url = "http://127.0.0.1:8000"  # Явно указываем базовый URL
+            success_url = f"{base_url}/api/payments/success/"
+            cancel_url = f"{base_url}/api/payments/cancel/"
 
             session = StripeService.create_checkout_session(
                 price.id,
@@ -155,9 +161,19 @@ class UserViewSet(viewsets.ModelViewSet):
         return User.objects.filter(id=self.request.user.id)
 
 
-# Простые views для успеха/отмены оплаты
-def payment_success(request):
-    return render(request, 'payments/success.html')
+# 🔥 УДАЛИМ СТАРЫЕ ФУНКЦИИ И ДОБАВИМ НОВЫЕ КЛАССЫ:
 
-def payment_cancel(request):
-    return render(request, 'payments/cancel.html')
+@method_decorator(csrf_exempt, name='dispatch')
+class PaymentSuccessView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        return render(request, 'payments/success.html')
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class PaymentCancelView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        return render(request, 'payments/cancel.html')

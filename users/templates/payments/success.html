@@ -2,9 +2,36 @@
 <html>
 <head>
     <title>Payment Success</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        .success { color: green; }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Payment Successful! 🎉</h1>
-    <p>Thank you for your payment.</p>
+    <h1 class="success">✅ Payment Successful!</h1>
+    <p>Thank you for your payment. Your course has been activated.</p>
+
+    <div>
+        <a href="/api/swagger/" class="button">Back to API</a>
+        <a href="/admin/" class="button">Admin Panel</a>
+    </div>
+
+    <script>
+        // Автоматически проверяем статус платежа
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+        if (sessionId) {
+            console.log('Stripe session ID:', sessionId);
+        }
+    </script>
 </body>
 </html>
