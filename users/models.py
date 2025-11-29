@@ -44,10 +44,18 @@ class User(AbstractUser):
         return self.email
 
 
+# ВЫНЕСИ Payment ИЗ КЛАССА User - он должен быть на этом уровне
 class Payment(models.Model):
     PAYMENT_METHODS = [
         ('cash', 'Наличные'),
         ('transfer', 'Перевод на счет'),
+        ('stripe', 'Stripe'),
+    ]
+
+    PAYMENT_STATUSES = [
+        ('pending', 'Ожидает оплаты'),
+        ('paid', 'Оплачено'),
+        ('failed', 'Ошибка оплаты'),
     ]
 
     user = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name='Пользователь')
@@ -59,6 +67,14 @@ class Payment(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Сумма оплаты')
     payment_method = models.CharField(max_length=10, choices=PAYMENT_METHODS, verbose_name='Способ оплаты')
 
+    # Поля для Stripe - используем TextField (без ограничения длины)
+    stripe_product_id = models.TextField(blank=True, null=True, verbose_name='ID продукта в Stripe')
+    stripe_price_id = models.TextField(blank=True, null=True, verbose_name='ID цены в Stripe')
+    stripe_session_id = models.TextField(blank=True, null=True, verbose_name='ID сессии в Stripe')
+    stripe_payment_link = models.TextField(blank=True, null=True, verbose_name='Ссылка на оплату Stripe')
+    payment_status = models.CharField(max_length=10, choices=PAYMENT_STATUSES, default='pending',
+                                      verbose_name='Статус оплаты')
+
     class Meta:
         verbose_name = 'Платеж'
         verbose_name_plural = 'Платежи'
@@ -66,3 +82,6 @@ class Payment(models.Model):
 
     def __str__(self):
         return f"Платеж {self.user.email} - {self.amount}"
+
+
+

@@ -43,5 +43,6 @@ class CourseSerializer(serializers.ModelSerializer):
         allow_blank=True
     )
 
-    def get_lessons_count(self, obj):
+    def get_lessons_count(self, obj) -> int:
         return obj.lessons.count()
+
