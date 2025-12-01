@@ -1,4 +1,21 @@
 from django.db import models
+from django.db import models
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    course = models.ForeignKey('Course', on_delete=models.CASCADE)
+    # Добавим поле is_active
+    is_active = models.BooleanField(default=True, verbose_name='Активна')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+
+    class Meta:
+        unique_together = ['user', 'course']
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписки'
+
+    def __str__(self):
+        return f"{self.user.email} - {self.course.title}"
 
 
 class Course(models.Model):
@@ -6,6 +23,7 @@ class Course(models.Model):
     preview = models.ImageField(upload_to='courses/previews/', blank=True, null=True, verbose_name='Превью')
     description = models.TextField(blank=True, null=True, verbose_name='Описание')
     owner = models.ForeignKey('users.User', on_delete=models.CASCADE, null=True, blank=True, verbose_name='Владелец')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
 
     class Meta:
         verbose_name = 'Курс'

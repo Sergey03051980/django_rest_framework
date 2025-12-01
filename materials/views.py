@@ -10,6 +10,8 @@ from .serializers import CourseSerializer, LessonSerializer
 from .paginators import MaterialsPaginator
 from users.permissions import IsOwner, IsModerator, IsNotModerator
 from rest_framework import status  # Добавляем импорт
+from django.utils import timezone
+from datetime import timedelta
 
 
 class SubscriptionAPIView(APIView):
@@ -68,6 +70,20 @@ class CourseViewSet(viewsets.ModelViewSet):
         elif self.action in ['update', 'partial_update', 'destroy']:
             self.permission_classes = [IsOwner | IsModerator]
         return super().get_permissions()
+
+    def perform_update(self, serializer):
+        instance = serializer.save()
+
+        # Дополнительное задание: проверка времени последнего обновления
+        four_hours_ago = timezone.now() - timedelta(hours=4)
+
+        # Если курс не обновлялся более 4 часов, отправляем уведомления
+        if instance.updated_at and instance.updated_at < four_hours_ago:
+            # Запускаем асинхронную задачу
+            send_course_update_notification.delay(
+                course_id=instance.id,
+                course_title=instance.title
+            )
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
